@@ -1,26 +1,25 @@
 from dotenv import load_dotenv
 import os
-
-load_dotenv()
-# my_api_key = os.getenv("ANTHROPIC_API_KEY")
-
+from typing import Optional
 from anthropic import Anthropic
 import sys
 
+load_dotenv()
+# my_api_key: Optional[str] = os.getenv("ANTHROPIC_API_KEY")
+
 # client = Anthropic(api_key=my_api_key)
 # automatically looks for an "ANTHROPIC_API_KEY" environment variable
-client = Anthropic()
-
+client: Anthropic = Anthropic()
 
 if len(sys.argv) != 3:
     print("Usage: python script.py 'text' language")
     sys.exit(1)
 
-txt = sys.argv[1]
-lang = sys.argv[2]
+txt: str = sys.argv[1]
+lang: str = sys.argv[2]
 
 
-def translate(text, language):
+def translate(text: str, language: str) -> str:
     res = client.messages.create(
         model="claude-3-haiku-20240307",
         max_tokens=1000,
